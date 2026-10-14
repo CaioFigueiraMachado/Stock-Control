@@ -1,0 +1,34 @@
+---
+title: "StockControl — Diagrama de Atividades: login do administrador e inclusão de produto"
+---
+flowchart TD
+    I((Início)) --> A[Abrir a tela de login]
+    A --> B[/Informar e-mail e senha/]
+    B --> C{Credenciais<br/>válidas no BD?}
+    C -- Não --> D[Exibir mensagem:<br/>E-mail ou senha incorretos]
+    D --> B
+    C -- Sim --> E{Perfil é<br/>administrador?}
+    E -- Não --> F[Listagem em modo consulta<br/>sem Novo produto]
+    F --> Z((Fim))
+    E -- Sim --> G[Exibir listagem de produtos ativos]
+    G --> H[Clicar em Novo produto]
+    H --> J[/Preencher nome, descrição,<br/>categoria e preço/]
+    J --> K[/Informar quantidade inicial/]
+    K --> L[/Definir status: Ativo ou Inativo/]
+    L --> M[/Adicionar imagem/]
+    M --> N{Todos os campos<br/>preenchidos?}
+    N -- Não --> O[Botão Cadastrar desabilitado]
+    O --> J
+    N -- Sim --> P[Clicar em Cadastrar]
+    P --> Q[Sistema grava o produto<br/>com data de inclusão automática]
+    Q --> R[Sistema registra a Entrada<br/>do estoque inicial no histórico]
+    R --> S[Redirecionar para a listagem<br/>com mensagem de sucesso]
+    S --> T{Registrar comentário<br/>sobre o produto?}
+    T -- Não --> Z
+    T -- Sim --> U[Abrir Comentários e<br/>clicar em Adicionar comentário]
+    U --> V[/Digitar o comentário/]
+    V --> W{Texto vazio?}
+    W -- Sim --> X[Exibir erro: campo obrigatório]
+    X --> V
+    W -- Não --> Y[Gravar com usuário logado e data atual<br/>Sucesso! Comentário cadastrado para o produto.]
+    Y --> Z

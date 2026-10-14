@@ -1,0 +1,56 @@
+---
+title: "StockControl — Diagrama Entidade-Relacionamento (DER)"
+---
+erDiagram
+    AUTH_USERS ||--|| usuarios : "1:1 (conta e senha)"
+    usuarios ||--o{ movimentacoes : "responsible_id"
+    usuarios ||--o{ comentarios : "author_id"
+    produtos ||--o{ movimentacoes : "product_id"
+    produtos ||--o{ comentarios : "product_id"
+
+    AUTH_USERS {
+        uuid id PK
+        text email UK
+        text encrypted_password "senha criptografada"
+    }
+    usuarios {
+        uuid id PK,FK "auth.users.id"
+        text name "NOT NULL"
+        text role "admin | user"
+        timestamptz created_at
+    }
+    produtos {
+        uuid id PK
+        text code UK "SC-1049..."
+        text name "NOT NULL"
+        text category "NOT NULL"
+        text description "max 500"
+        numeric price "maior que 0"
+        integer stock "maior ou igual a 0"
+        text unit
+        boolean active "status"
+        text image_url
+        timestamptz created_at "data de inclusao"
+        timestamptz updated_at
+    }
+    movimentacoes {
+        uuid id PK
+        uuid product_id FK "produtos.id"
+        text type "Entrada | Saida | Ajuste"
+        integer quantity "maior que 0"
+        text note "observacoes"
+        integer balance "estoque apos"
+        uuid responsible_id FK "usuarios.id"
+        text responsible_name
+        timestamptz moved_at
+        timestamptz created_at
+    }
+    comentarios {
+        uuid id PK
+        uuid product_id FK "produtos.id"
+        uuid author_id FK "usuarios.id"
+        text author_name
+        text author_role
+        text body "1 a 500 caracteres"
+        timestamptz created_at
+    }
