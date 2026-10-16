@@ -1,5 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from "react";
-import { AlertCircle, ArrowLeft, Boxes, Check, Eye, EyeOff, Info, ShieldCheck, User, UserPlus } from "lucide-react";
+import { AlertCircle, ArrowLeft, Check, Eye, EyeOff, Info, ShieldCheck, User, UserPlus } from "lucide-react";
+import { LogoMark } from "../components/LogoMark";
 import { Button, Field, Logo, TextInput, errorMessage } from "../components/ui";
 import { isDemo, resetPassword, signIn, signInDemoUser, signUp } from "../lib/api";
 import type { Profile, Screen } from "../types";
@@ -31,7 +32,7 @@ function AuthLayout({ children, mode }: { children: ReactNode; mode: "login" | "
           </div>
         </div>
         <div className="auth-decoration">
-          <Boxes size={180} strokeWidth={0.7} />
+          <LogoMark size={220} />
         </div>
       </section>
       <section className="auth-panel">
