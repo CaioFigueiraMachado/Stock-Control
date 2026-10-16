@@ -1,5 +1,6 @@
 import { useState, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from "react";
-import { AlertCircle, ArrowLeft, Boxes, Check, ClipboardList, ImageOff, X } from "lucide-react";
+import { AlertCircle, ArrowLeft, Check, ClipboardList, ImageOff, X } from "lucide-react";
+import { LogoMark } from "./LogoMark";
 import { CRITICAL_STOCK } from "../data";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -116,7 +117,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <div className="logo">
       <span className="logo-mark">
-        <Boxes size={22} />
+        <LogoMark size={26} />
       </span>
       {!compact && (
         <span>
